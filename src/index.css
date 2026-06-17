@@ -1,0 +1,155 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================
+   ContextPulse Design System
+   Enterprise-grade dark theme with glassmorphism
+   ============================================ */
+
+@layer base {
+  * {
+    @apply border-white/[0.08];
+  }
+
+  body {
+    @apply bg-bg-0 text-text-primary;
+    font-feature-settings: "cv11", "ss01", "ss03";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(99, 102, 241, 0.3);
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(99, 102, 241, 0.5);
+  }
+}
+
+@layer components {
+  /* Glassmorphism Card */
+  .glass-card {
+    @apply bg-white/[0.05] backdrop-blur-xl border border-white/[0.08] rounded-2xl shadow-card;
+    transition: all 0.3s ease;
+  }
+  .glass-card:hover {
+    @apply bg-white/[0.07] shadow-card-hover border-white/[0.12];
+  }
+
+  /* Premium Glass Card with gradient border */
+  .glass-card-premium {
+    position: relative;
+    @apply bg-white/[0.05] backdrop-blur-xl rounded-2xl shadow-card overflow-hidden;
+  }
+  .glass-card-premium::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, rgba(99,102,241,0.4), rgba(168,85,247,0.4), rgba(34,211,238,0.2));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  /* Gradient Text */
+  .gradient-text {
+    @apply bg-gradient-accent bg-clip-text text-transparent;
+  }
+
+  /* Glow Button */
+  .btn-glow {
+    @apply bg-gradient-accent text-white font-semibold px-6 py-3 rounded-xl;
+    @apply hover:shadow-glow transition-all duration-300;
+    @apply active:scale-[0.98];
+  }
+
+  /* Status Badge */
+  .status-badge {
+    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium;
+    @apply bg-white/[0.08] border border-white/[0.1];
+  }
+
+  /* Metric Card */
+  .metric-card {
+    @apply glass-card p-6;
+  }
+
+  /* Sidebar Item */
+  .sidebar-item {
+    @apply flex items-center gap-3 px-4 py-3 rounded-xl text-text-secondary;
+    @apply hover:bg-white/[0.05] hover:text-text-primary transition-all duration-200;
+    @apply cursor-pointer;
+  }
+  .sidebar-item.active {
+    @apply bg-gradient-card text-white border border-white/[0.1];
+  }
+
+  /* Live Pulse Dot */
+  .live-dot {
+    @apply w-2 h-2 rounded-full bg-success;
+    animation: livePulse 2s ease-in-out infinite;
+  }
+  
+  /* Data Grid Cell */
+  .heatmap-cell {
+    @apply rounded-sm transition-all duration-200;
+  }
+  .heatmap-cell:hover {
+    @apply ring-1 ring-white/30 scale-110 z-10;
+  }
+
+  /* Shimmer Loading */
+  .shimmer {
+    @apply relative overflow-hidden;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.04), transparent);
+    background-size: 200% 100%;
+    animation: shimmer 2s linear infinite;
+  }
+
+  /* Event Stream Item */
+  .event-item {
+    @apply flex items-start gap-3 p-3 rounded-lg;
+    @apply hover:bg-white/[0.03] transition-colors duration-200;
+    @apply border-l-2 border-transparent;
+  }
+  .event-item:hover {
+    @apply border-l-accent-blue;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-gradient-accent bg-clip-text text-transparent;
+  }
+  
+  .bg-mesh {
+    background: 
+      radial-gradient(at 40% 20%, rgba(99,102,241,0.12) 0px, transparent 50%),
+      radial-gradient(at 80% 0%, rgba(168,85,247,0.08) 0px, transparent 50%),
+      radial-gradient(at 0% 50%, rgba(34,211,238,0.06) 0px, transparent 50%),
+      radial-gradient(at 60% 80%, rgba(236,72,153,0.06) 0px, transparent 50%);
+  }
+}
+
+@keyframes livePulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.2); }
+}
+
+/* Recharts custom tooltip styling */
+.recharts-tooltip-wrapper .custom-tooltip {
+  @apply glass-card p-3 !important;
+}
